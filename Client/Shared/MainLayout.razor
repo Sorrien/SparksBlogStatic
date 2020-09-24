@@ -1,15 +1,48 @@
 ﻿@inherits LayoutComponentBase
-
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+@*<div class="sidebar">
+        <NavMenu />
     </div>
 
-    <div class="content px-4">
-        @Body
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>*@
+
+<NavMenu />
+@*<div class="navbar-underline"></div>*@
+<article class="body-content">
+    @Body
+</article>
+<footer id="footer-bottom">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <ul id="social-media" class="list-inline">
+                <li class="list-inline-item">
+                    <a href="https://www.linkedin.com/in/collin-sparks-b6065953/" target="_blank">
+                        <span aria-hidden="true" class="fa-stack 1x">
+                            <i class="fa fa-circle fa-stack-2x media-icon-background"></i>
+                            <i class="fa fa-linkedin fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://github.com/Sorrien" target="_blank">
+                        <span aria-hidden="true" class="fa-stack 1x">
+                            <i class="fa fa-circle fa-stack-2x media-icon-background"></i>
+                            <i class="fa fa-github-alt fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="copyright">
+                <p><span class="fa fa-copyright"></span> @DateTime.Now.Year - Collin Sparks </p>
+                <p id="disclaimer">Disclaimer: Opinions expressed are solely my own and do not express the views or opinions of my employer.</p>
+            </div>
+        </div>
     </div>
-</div>
+</footer>

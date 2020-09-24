@@ -1,7 +1,30 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<section id="home-background">
+    <section id="background-title" class="col-md-6 offset-md-3">
+        <h1>Welcome</h1>
+        <h2>to my portfolio</h2>
+    </section>
+</section>
+<section id="introduction-section" class="row">
+    <section class="col-md-6 offset-md-3 title-summary">
+        <h2>My name is Collin Sparks and I am a Software Developer.</h2>
+        <p>I am based in Georgia and I have worked professionally as a Software Developer for @(DateTime.Now.Year - 2014) years. My passion for programming has led me to learn a wide variety of frameworks and platforms. You can learn more about me <a href="about">here</a>.</p>
+    </section>
+</section>
+@*<section id="recent-articles-section">
+        <section class="container">
+            <section class="col-md-6 offset-md-3 title-summary">
+                <h3>Recent Posts</h3>
+            </section>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+            <section class="row">
+                <section class="col-md-12">
+                    @foreach (var item in Model)
+                    {
+                        <partial name="ArticleThumbnail" model="@item" />
+                    }
+                </section>
+            </section>
+        </section>
+    </section>*@
