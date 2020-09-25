@@ -1,81 +1,83 @@
 ﻿@page "/about"
 
 
-<section id="about-intro-section" class="row">
-    <section class="col-md-6 offset-md-3">
-        <img class="img-fluid rounded-circle" src="/images/gradphoto.jpg" />
-        <section>
-            <h1>Collin Sparks</h1>
-            <p>I have been a Software Developer for @(DateTime.Now.Year - 2014) years. Software Development is not only my profession, but my passion as well.</p>
+<div class="container-fluid">
+    <section id="about-intro-section" class="row">
+        <section class="col-md-6 offset-md-3">
+            <img class="img-fluid rounded-circle" src="/images/gradphoto.jpg" />
+            <section>
+                <h1>Collin Sparks</h1>
+                <p>I have been a Software Developer for @(DateTime.Now.Year - 2014) years. Software Development is not only my profession, but my passion as well.</p>
+            </section>
         </section>
     </section>
-</section>
-<section id="about-description-section" class="row title-summary">
-    <section class="col-md-8 offset-md-2">
-        <h3>About Me</h3>
-        <p>
-            I have experience professionally with Web Development as well as Mobile Development. In my spare time I enjoy working on side projects to keep my skills sharp.
-            Game Development allows me to pit myself with challenges I do not find myself faced with in my professional work. I take on a variety of other hobby projects as well.
-        </p>
+    <section id="about-description-section" class="row title-summary">
+        <section class="col-md-8 offset-md-2">
+            <h3>About Me</h3>
+            <p>
+                I have experience professionally with Web Development as well as Mobile Development. In my spare time I enjoy working on side projects to keep my skills sharp.
+                Game Development allows me to pit myself with challenges I do not find myself faced with in my professional work. I take on a variety of other hobby projects as well.
+            </p>
+        </section>
     </section>
-</section>
-<section id="technology-section" class="row">
-    <section class="col-md-8 offset-md-2 title-summary">
-        <h3>Technologies</h3>
-        <p>Years of experience have taught me the following technologies well:</p>
+    <section id="technology-section" class="row">
+        <section class="col-md-8 offset-md-2 title-summary">
+            <h3>Technologies</h3>
+            <p>Years of experience have taught me the following technologies well:</p>
+        </section>
+        <section class="item-list-section col-md-6 offset-md-3">
+            <h3>Languages</h3>
+            <ul>
+                <li>C#</li>
+                <li>Objective-C</li>
+                <li>Java</li>
+                <li>C++</li>
+                <li>T-SQL</li>
+                <li>JavaScript</li>
+                <li>Rust</li>
+                <li>PHP</li>
+                <li>HTML</li>
+                <li>SCSS</li>
+                <li>CSS</li>
+                <li>Assembly</li>
+            </ul>
+        </section>
+        <section class="item-list-section col-md-6 offset-md-3">
+            <h3>Frameworks</h3>
+            <ul>
+                <li>ASP.NET Framework</li>
+                <li>ASP.NET Core</li>
+                <li>ASP.NET Web Forms</li>
+                <li>ASP.NET MVC</li>
+                <li>ASP.NET Web API</li>
+                <li>.NET Framework</li>
+                <li>.NET Core</li>
+                <li>Cocoa Touch</li>
+                <li>Entity Framework</li>
+                <li>Entity Framework Core</li>
+                <li>SQLite</li>
+                <li>SQL Server</li>
+                <li>JQuery</li>
+                <li>Unreal Engine 4</li>
+                <li>SpatialOS</li>
+            </ul>
+        </section>
     </section>
-    <section class="item-list-section col-md-6 offset-md-3">
-        <h3>Languages</h3>
-        <ul>
-            <li>C#</li>
-            <li>Objective-C</li>
-            <li>Java</li>
-            <li>C++</li>
-            <li>T-SQL</li>
-            <li>JavaScript</li>
-            <li>Rust</li>
-            <li>PHP</li>
-            <li>HTML</li>
-            <li>SCSS</li>
-            <li>CSS</li>
-            <li>Assembly</li>
-        </ul>
+    <section id="interest-section" class="row">
+        <section class="col-md-8 offset-md-2 title-summary">
+            <h3>Interests</h3>
+            <p>When I do have spare time I spend most of it trying to learn something I have not had the opportunity to learn at work, or in school.</p>
+        </section>
+        <section class="item-list-section col-md-6 offset-md-3">
+            <ul>
+                <li>Unreal Engine 4</li>
+                <li>Virtual Reality</li>
+                <li>Artificial Intelligence</li>
+                <li>Chat Bots</li>
+                <li>Web Optimization</li>
+                <li>Game Engine Architecture</li>
+                <li>SpatialOS</li>
+            </ul>
+        </section>
     </section>
-    <section class="item-list-section col-md-6 offset-md-3">
-        <h3>Frameworks</h3>
-        <ul>
-            <li>ASP.NET Framework</li>
-            <li>ASP.NET Core</li>
-            <li>ASP.NET Web Forms</li>
-            <li>ASP.NET MVC</li>
-            <li>ASP.NET Web API</li>
-            <li>.NET Framework</li>
-            <li>.NET Core</li>
-            <li>Cocoa Touch</li>
-            <li>Entity Framework</li>
-            <li>Entity Framework Core</li>
-            <li>SQLite</li>
-            <li>SQL Server</li>
-            <li>JQuery</li>
-            <li>Unreal Engine 4</li>
-            <li>SpatialOS</li>
-        </ul>
-    </section>
-</section>
-<section id="interest-section" class="row">
-    <section class="col-md-8 offset-md-2 title-summary">
-        <h3>Interests</h3>
-        <p>When I do have spare time I spend most of it trying to learn something I have not had the opportunity to learn at work, or in school.</p>
-    </section>
-    <section class="item-list-section col-md-6 offset-md-3">
-        <ul>
-            <li>Unreal Engine 4</li>
-            <li>Virtual Reality</li>
-            <li>Artificial Intelligence</li>
-            <li>Chat Bots</li>
-            <li>Web Optimization</li>
-            <li>Game Engine Architecture</li>
-            <li>SpatialOS</li>
-        </ul>
-    </section>
-</section>
+</div>
