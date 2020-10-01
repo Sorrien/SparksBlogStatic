@@ -1,5 +1,7 @@
 ﻿using BlazorApp.Api.DataAccess;
 using BlazorApp.Shared;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlazorApp.Api.Coordinators
@@ -7,6 +9,7 @@ namespace BlazorApp.Api.Coordinators
     public interface IArticleCoordinator
     {
         Task<Article> GetArticle(string id);
+        Task<List<ArticleThumbnail>> GetArticles();
     }
 
     public class ArticleCoordinator : IArticleCoordinator
@@ -29,6 +32,13 @@ namespace BlazorApp.Api.Coordinators
                 CreatedDate = articleItem.CreatedDate
             };
             return article;
+        }
+
+        public async Task<List<ArticleThumbnail>> GetArticles()
+        {
+            var articleItems = await _articleDataAccess.GetArticles();
+            var articles = articleItems.Select(x => new ArticleThumbnail() { Id = x.Id, Title = x.Title, CreatedDate = x.CreatedDate }).ToList();
+            return articles;
         }
     }
 }

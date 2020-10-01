@@ -9,19 +9,12 @@ namespace BlazorApp.Api.DataAccess
     public interface IArticleDataAccess
     {
         Task<ArticleDB> GetArticle(string id);
+        Task<List<ArticleThumbnailDB>> GetArticles();
     }
+
     public class ArticleDataAccess : CosmosDataAccess, IArticleDataAccess
     {
         private readonly Container _container;
-        //public ArticleDataAccess(CosmosClient dbClient, string databaseName, string containerName)
-        //{
-        //    _container = dbClient.GetContainer(databaseName, containerName);
-        //}
-
-        //public ArticleDataAccess()
-        //{
-
-        //}
 
         public ArticleDataAccess(CosmosClient dbClient)
         {
@@ -52,6 +45,29 @@ namespace BlazorApp.Api.DataAccess
             }
 
             return articles.FirstOrDefault();
+        }
+
+        public async Task<List<ArticleThumbnailDB>> GetArticles()
+        {
+            var articles = new List<ArticleThumbnailDB>();
+            var queryDef = new QueryDefinition("SELECT a.id, a.title, a.createdDate FROM Articles a");
+
+            var options = new QueryRequestOptions() { MaxBufferedItemCount = 100 };
+            options.MaxConcurrency = 1; //max parallel tasks
+            using (var query = _container.GetItemQueryIterator<ArticleThumbnailDB>(
+                queryDef,
+                requestOptions: options))
+            {
+                while (query.HasMoreResults)
+                {
+                    foreach (var article in await query.ReadNextAsync())
+                    {
+                        articles.Add(article);
+                    }
+                }
+            }
+
+            return articles;
         }
     }
 }

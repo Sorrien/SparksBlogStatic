@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Http;
@@ -29,7 +30,7 @@ namespace BlazorApp.Api.Functions
         [FunctionName("GetArticle")]
         [Display(Name = "Get Article", Description = "Gets an article")]
         [ProducesResponseType(typeof(HttpResponseMessage), (int)HttpStatusCode.OK)]
-        public async Task<HttpResponseMessage> GetArticle([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Article")] GetArticleRequest request)
+        public async Task<HttpResponseMessage> GetArticle([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Article/{id}")] GetArticleRequest request)
         {
             HttpStatusCode statusCode;
             Article article;
@@ -56,6 +57,32 @@ namespace BlazorApp.Api.Functions
             {
                 StatusCode = statusCode,
                 Content = new StringContent(JsonSerializer.Serialize(article), Encoding.UTF8, MediaTypeNames.Application.Json)
+            };
+        }
+
+        [FunctionName("GetArticles")]
+        [Display(Name = "Get Articles", Description = "Get articles")]
+        [ProducesResponseType(typeof(HttpResponseMessage), (int)HttpStatusCode.OK)]
+        public async Task<HttpResponseMessage> GetArticles([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Article")] HttpRequestMessage request)
+        {
+            HttpStatusCode statusCode;
+            List<ArticleThumbnail> articles;
+            try
+            {
+                articles = await _articleCoordinator.GetArticles();
+                statusCode = HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get article.");
+                statusCode = HttpStatusCode.InternalServerError;
+                articles = null;
+            }
+
+            return new HttpResponseMessage()
+            {
+                StatusCode = statusCode,
+                Content = new StringContent(JsonSerializer.Serialize(articles), Encoding.UTF8, MediaTypeNames.Application.Json)
             };
         }
     }
