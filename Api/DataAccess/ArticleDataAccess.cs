@@ -1,0 +1,57 @@
+﻿using BlazorApp.Api.DataAccess.Model;
+using Microsoft.Azure.Cosmos;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BlazorApp.Api.DataAccess
+{
+    public interface IArticleDataAccess
+    {
+        Task<ArticleDB> GetArticle(string id);
+    }
+    public class ArticleDataAccess : CosmosDataAccess, IArticleDataAccess
+    {
+        private readonly Container _container;
+        //public ArticleDataAccess(CosmosClient dbClient, string databaseName, string containerName)
+        //{
+        //    _container = dbClient.GetContainer(databaseName, containerName);
+        //}
+
+        //public ArticleDataAccess()
+        //{
+
+        //}
+
+        public ArticleDataAccess(CosmosClient dbClient)
+        {
+            var databaseName = "SparksBlogDB";
+            var containerName = "Articles";
+            _container = dbClient.GetContainer(databaseName, containerName);
+        }
+
+        public async Task<ArticleDB> GetArticle(string id)
+        {
+            var articles = new List<ArticleDB>();
+            var queryDef = new QueryDefinition("SELECT * FROM Articles a WHERE a.id = @id")
+                .WithParameter("@id", id);
+
+            var options = new QueryRequestOptions() { MaxBufferedItemCount = 100 };
+            options.MaxConcurrency = 1; //max parallel tasks
+            using (var query = _container.GetItemQueryIterator<ArticleDB>(
+                queryDef,
+                requestOptions: options))
+            {
+                while (query.HasMoreResults)
+                {
+                    foreach (var article in await query.ReadNextAsync())
+                    {
+                        articles.Add(article);
+                    }
+                }
+            }
+
+            return articles.FirstOrDefault();
+        }
+    }
+}

@@ -1,0 +1,46 @@
+﻿@page "/post"
+
+@using BlazorApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+<section id="article-title-section" class="row">
+    <section class="col-md-6 offset-md-3">
+        @if (article == null)
+        {
+            <h3>Loading...</h3>
+        }
+        else
+        {
+            <h3>@article.Title</h3>
+        }
+    </section>
+</section>
+
+@if (article != null)
+{
+    <section id="article-content-section" class="row">
+        <section class="col-md-8 offset-md-2">
+            @((MarkupString)article.Content)
+        </section>
+    </section>
+}
+
+
+@code {
+    private Article article;
+    string id = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            NavManager.TryGetQueryString<string>("Id", out id);
+            article = await Http.GetFromJsonAsync<Article>($"/api/Article?Id={id.ToString()}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+    }
+}
