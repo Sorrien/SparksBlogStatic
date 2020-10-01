@@ -67,22 +67,25 @@ namespace BlazorApp.Api.Functions
         {
             HttpStatusCode statusCode;
             List<ArticleThumbnail> articles;
+            var exceptionMessage = "";
             try
             {
                 articles = await _articleCoordinator.GetArticles();
                 statusCode = HttpStatusCode.OK;
+                throw new Exception("It failed and stuff");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to get article.");
                 statusCode = HttpStatusCode.InternalServerError;
                 articles = null;
+                exceptionMessage = $"{{ \"Error\": \"Message: {ex.Message} StackTrace: {ex.StackTrace} InnerMessage: {ex.InnerException?.Message}\" }}";
             }
 
             return new HttpResponseMessage()
             {
                 StatusCode = statusCode,
-                Content = new StringContent(JsonSerializer.Serialize(articles), Encoding.UTF8, MediaTypeNames.Application.Json)
+                Content = new StringContent(articles == null ? exceptionMessage : JsonSerializer.Serialize(articles), Encoding.UTF8, MediaTypeNames.Application.Json)
             };
         }
     }

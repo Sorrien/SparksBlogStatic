@@ -12,7 +12,7 @@ namespace BlazorApp.Api.DataAccess
         Task<List<ArticleThumbnailDB>> GetArticles();
     }
 
-    public class ArticleDataAccess : CosmosDataAccess, IArticleDataAccess
+    public class ArticleDataAccess : IArticleDataAccess
     {
         private readonly Container _container;
 
