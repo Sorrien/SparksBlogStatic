@@ -72,7 +72,6 @@ namespace BlazorApp.Api.Functions
             {
                 articles = await _articleCoordinator.GetArticles();
                 statusCode = HttpStatusCode.OK;
-                throw new Exception("It failed and stuff");
             }
             catch (Exception ex)
             {
