@@ -4,27 +4,29 @@
 @inject HttpClient Http
 @inject NavigationManager NavManager
 
-<section id="article-title-section" class="row">
-    <section class="col-md-6 offset-md-3">
-        @if (article == null)
-        {
-            <h3>Loading...</h3>
-        }
-        else
-        {
-            <h3>@article.Title</h3>
-        }
-    </section>
-</section>
-
-@if (article != null)
-{
-    <section id="article-content-section" class="row">
-        <section class="col-md-8 offset-md-2">
-            @((MarkupString)article.Content)
+<div class="container">
+    <section id="article-title-section" class="row">
+        <section class="col-md-6 offset-md-3">
+            @if (article == null)
+            {
+                <h3>Loading...</h3>
+            }
+            else
+            {
+                <h3>@article.Title</h3>
+            }
         </section>
     </section>
-}
+
+    @if (article != null)
+    {
+        <section id="article-content-section" class="row">
+            <section class="col-md-8 offset-md-2">
+                @((MarkupString)article.Content)
+            </section>
+        </section>
+    }
+</div>
 
 
 @code {
