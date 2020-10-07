@@ -1,5 +1,6 @@
 ﻿using BlazorApp.Api.DataAccess.Model;
 using Microsoft.Azure.Cosmos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,9 +19,7 @@ namespace BlazorApp.Api.DataAccess
 
         public ArticleDataAccess(CosmosClient dbClient)
         {
-            var databaseName = "SparksBlogDB";
-            var containerName = "Articles";
-            _container = dbClient.GetContainer(databaseName, containerName);
+            _container = dbClient.GetContainer(Environment.GetEnvironmentVariable("SparksBlogDatabaseName"), Environment.GetEnvironmentVariable("ArticleContainerName"));
         }
 
         public async Task<ArticleDB> GetArticle(string id)
