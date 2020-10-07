@@ -15,6 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -31,11 +36,6 @@ jobs:
           api_location: "/Api" # Api source code path - optional
           app_artifact_location: "wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-          languages: ${{ matrix.language }}
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
